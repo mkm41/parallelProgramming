@@ -1,0 +1,50 @@
+# включить  < iostream >
+# включить < поток >
+используя  пространство имен  std ;
+ 
+# определить  N  2
+ 
+void  multiply ( int mat1 [] [N],
+              int mat2 [] [N],
+              int res [] [N])
+{
+    int i, j, k;
+    for (i = 0 ; i <N; i ++) {
+        for (j = 0 ; j <N; j ++) {
+            res [i] [j] = 0 ;
+            для (k = 0 ; k <N; k ++)
+                res [i] [j] + = mat1 [i] [k] * mat2 [k] [j];
+        }
+    }
+}
+ 
+int  main ()
+{
+    int i, j;
+    int res [N] [N];
+    int mat1 [N] [N] = {{ 1 , 1 },
+                       { 2 , 2 }};
+ 
+    int mat2 [N] [N] = {{ 3 , 3 },
+                       { 4 , 4 }};
+ 
+    поток th1 ([&] () {
+	multiply (mat1, mat2, res);});
+    поток th2 ([&] () {
+ 	multiply (mat1, mat2, res);});
+ 	поток th3 ([&] () {
+	multiply (mat1, mat2, res);});
+ 	поток th4 ([&] () {
+	multiply (mat1, mat2, res);});
+    cout << " Матрица результатов равна \ n " ;
+    for (i = 0 ; i <N; i ++) {
+        для (j = 0 ; j <N; j ++)
+            cout << res [i] [j] << "  " ;
+        cout << " \ n " ;
+    }
+   th1. присоединиться ();
+   th2. присоединиться ();
+   th3. присоединиться ();
+   th4. присоединиться ();
+    возврат  0 ;
+}
